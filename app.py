@@ -69,12 +69,13 @@ def listar_restaurante(limpar_tela_):
         print(' | '.join(f'{key}: {value if not isinstance(value, bool) else ('sim' if value else 'não')}'.ljust(74 if key == 'nome' else 10) for key, value in restaurante.items()))
     if limpar_tela_: reiniciar()
 
-def alterar_ativo_restaurante():
+def alterar_ativo_restaurante(limpar_tela):
     try:
+
+        if (limpar_tela) : os.system('cls')
+        
         id_ = ''
         encontrou = False
-
-        os.system('cls')
 
         # exibimos uma lista dos restaurantes cadastrados antes de ativar ou inativar
         listar_restaurante(False)
@@ -94,7 +95,7 @@ def alterar_ativo_restaurante():
         
         if not encontrou:
             exibir_subtitulo(f'restaurante de id {id_} não encontrado', True)
-            alterar_ativo_restaurante()
+            alterar_ativo_restaurante(False)
 
     except:
         opcao_invalida()
@@ -110,7 +111,7 @@ def escolher_opcao():
             case 2:
                 listar_restaurante(True)
             case 3:
-                 alterar_ativo_restaurante()
+                 alterar_ativo_restaurante(True)
             case 4:
                 encerrar_app()
             case _: # case else aqui
